@@ -2,21 +2,16 @@
 function summ(obj) {
     const values = Object.keys(obj).map((keys) => {
         const elem = obj[keys];
-        if (elem === undefined || elem === null)
+        if (!elem)
             return 2021;
+        const cvalue = elem.cvalue;
         if (typeof elem.cvalue === 'string')
             return parseInt(elem.cvalue) || 2021;
         if (typeof elem.cvalue === 'object')
-            return summ(elem.cvalue);
+            return summ(cvalue);
         return typeof elem.cvalue === 'number' ? elem.cvalue : 2021;
     });
-    let sum = 0;
-    for (const value of values) {
-        if (typeof value === 'number') {
-            sum += value;
-        }
-    }
-    return sum;
+    return values.reduce((acc, value) => acc + (typeof value === 'number' ? value : 0), 0);
 }
 const testObject1 = {
     a: { cvalue: 10 },
