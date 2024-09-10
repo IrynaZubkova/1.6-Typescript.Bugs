@@ -7,18 +7,14 @@ interface SummObject {
 function summ(obj: SummObject): number {
     const values = Object.keys(obj).map((keys) => {
         const elem = obj[keys];
-        if (elem === undefined || elem === null) return 2021;
+        if (!elem) return 2021;
+        const cvalue = elem.cvalue;
        if (typeof elem.cvalue === 'string') return parseInt(elem.cvalue) || 2021;
         if (typeof elem.cvalue === 'object') 
-            return summ(elem.cvalue);
+            return summ(cvalue as SummObject);
         return typeof elem.cvalue === 'number' ? elem.cvalue : 2021;
     });
-    let sum = 0;
-    for (const value of values){
-    if (typeof value ==='number') {
-        sum += value;
-    }}
-    return sum;
+    return values.reduce((acc, value) => acc + (typeof value === 'number' ? value : 0), 0);
 }
 
 const testObject1: SummObject = {
@@ -39,6 +35,6 @@ const testObject3: SummObject = {
     p: { cvalue: 50 }
 };
 
-console.log(summ(testObject1)); // Expected result: 60
-console.log(summ(testObject2)); // Expected result: 2061
-console.log(summ(testObject3)); // Expected result: 2171
+console.log(summ(testObject1)); // Очікуваний результат: 60
+console.log(summ(testObject2)); // Очікуваний результат: 2061
+console.log(summ(testObject3)); // Очікуваний результат: 2171
