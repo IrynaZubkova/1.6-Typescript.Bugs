@@ -35,6 +35,6 @@ const testObject3: SummObject = {
     p: { cvalue: 50 }
 };
 
-console.log(summ(testObject1)); // Очікуваний результат: 60
-console.log(summ(testObject2)); // Очікуваний результат: 2061
-console.log(summ(testObject3)); // Очікуваний результат: 2171
+console.log(summ(testObject1)); // Expected result: 60
+console.log(summ(testObject2)); // Expected result: 2061
+console.log(summ(testObject3)); // Expected result: 2171
